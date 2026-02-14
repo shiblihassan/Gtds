@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 16 - Final Print Ready</title>
+    <style>
+        /* A4 Page Setup */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #555;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+        .page-container {
+            width: 210mm;
+            min-height: 297mm; /* Ensure full A4 height */
+            background: white;
+            padding: 10mm;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Editing Styles */
+        [contenteditable="true"]:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+            outline: 1px dashed #007bff;
+            cursor: text;
+        }
+        input, textarea {
+            background: rgba(255, 255, 0, 0.1);
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-family: inherit;
+            font-size: inherit;
+            box-sizing: border-box;
+            padding: 2px;
+            resize: none;
+            outline: none;
+        }
+        input:focus, textarea:focus {
+            background: #e8f0fe;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            table-layout: fixed;
+            border: 1px solid black;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 3px 4px;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+
+        .bold { font-weight: bold; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .top { vertical-align: top; }
+        
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .page-container { margin: 0; border: none; width: 100%; height: 100%; padding: 5mm; }
+            .print-btn { display: none; }
+            input, textarea { background: transparent; }
+            [contenteditable="true"]:hover { background: none; outline: none; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print / Download PDF</button>
+
+<div class="page-container">
+    
+    <!-- HEADER -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2px;">
+        <div style="border: 1px solid black; width: 120px; display: flex; flex-direction: column; font-size: 9px;">
+            <div style="border-bottom: 1px solid black; padding: 3px; font-weight: bold;" contenteditable="true">Form No. - 16</div>
+            <div style="padding: 3px;" contenteditable="true">[See Rule 31(1) (a)]</div>
+        </div>
+        <div style="flex-grow: 1; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: 900;" contenteditable="true">T.D.S.</h1>
+        </div>
+        <div style="width: 120px;"></div>
+    </div>
+
+    <div style="font-size: 10px; font-weight: bold; text-align: center; margin-bottom: 5px; width: 100%;" contenteditable="true">
+        Certificate under Section 203 of the Income-Tax Act. 1961 for tax deducted at source from income <br> chargeable under the head "SALARIES"
+    </div>
+
+    <!-- MAIN TABLE START -->
+    <table style="border: 2px solid black;">
+        <colgroup>
+            <col style="width: 5%;"> <col style="width: 35%;"> <col style="width: 5%;"> <col style="width: 15%;">
+            <col style="width: 5%;"> <col style="width: 25%;"> <col style="width: 5%;"> <col style="width: 15%;">
+        </colgroup>
+        <tr>
+            <td colspan="4" class="bold" contenteditable="true">Name and address of the Employer</td>
+            <td colspan="4" class="bold" contenteditable="true">Name and designation of the Employee</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="white-space: nowrap;" contenteditable="true">District Programme Officer, Establishment, <span id="districtName1" contenteditable="true">Gopalganj</span></td>
+            <td colspan="4" rowspan="2" class="top" style="padding: 0;"><textarea placeholder="Enter Name & Designation"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center bold" contenteditable="true">PAN NO. OF THE DEDUCTOR</td>
+            <td colspan="2" class="center bold" contenteditable="true">TAN NO. OF DEDUCTOR</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center bold" contenteditable="true"><span id="deductorPAN" contenteditable="true">DCFPA5644N</span></td>
+            <td colspan="2" class="center bold" contenteditable="true"><span id="deductorTAN" contenteditable="true">PTND01409C</span></td>
+            <td colspan="2" class="center bold" contenteditable="true">PAN NO. OF THE EMPLOYEE</td>
+            <td colspan="2" style="padding: 0;"><input type="text" id="employeePAN" class="center bold" placeholder="PAN HERE" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center bold" contenteditable="true">Financial Year- <span id="financialYear" contenteditable="true">2025-26</span></td>
+            <td colspan="6" class="center bold" contenteditable="true">Assessment Year - <span id="assessmentYear1" contenteditable="true">2026-27</span></td>
+        </tr>
+    </table>
+
+    <!-- QUARTER DETAILS -->
+    <table style="margin-top: -1px; border-top: none;">
+        <colgroup>
+            <col style="width: 15%;"> <col style="width: 25%;"> <col style="width: 15%;"> <col style="width: 15%;"> <col style="width: 30%;">
+        </colgroup>
+        <tr>
+            <th rowspan="2" contenteditable="true">Quarter</th>
+            <th rowspan="2" contenteditable="true">Acknowledgement No.</th>
+            <th colspan="2" contenteditable="true">Period</th>
+            <th rowspan="2" contenteditable="true">Assessment Year</th>
+        </tr>
+        <tr><th contenteditable="true">From</th><th contenteditable="true">To</th></tr>
+        <tr>
+            <td class="center bold" contenteditable="true">24Q I</td>
+            <td style="padding:0;"><input type="text" class="center"></td>
+            <td rowspan="4" class="center bold" contenteditable="true">April 2025</td>
+            <td rowspan="4" class="center bold" contenteditable="true">March 2026</td>
+            <td rowspan="4" class="center bold" contenteditable="true">2026-27</td>
+        </tr>
+        <tr><td class="center bold" contenteditable="true">24Q II</td><td style="padding:0;"><input type="text" class="center"></td></tr>
+        <tr><td class="center bold" contenteditable="true">24Q III</td><td style="padding:0;"><input type="text" class="center"></td></tr>
+        <tr><td class="center bold" contenteditable="true">24Q IV</td><td style="padding:0;"><input type="text" class="center"></td></tr>
+    </table>
+
+    <div style="border: 1px solid black; border-top: none; text-align: center; font-weight: bold; padding: 3px; font-size: 11px;" contenteditable="true">
+        DETAILS OF SALARY PAID AND ANY OTHER INCOME AND TAX DEDUCTED
+    </div>
+
+    <!-- MASTER DATA TABLE (9 COLUMNS) -->
+    <table style="margin-top: -1px;">
+        <colgroup>
+            <col style="width: 25px;"> <col style="width: auto;"> <col style="width: 25px;"> <col style="width: 70px;">
+            <col style="width: 35px;"> <col style="width: 35px;"> <col style="width: auto;"> <col style="width: 35px;"> <col style="width: 60px;">
+        </colgroup>
+
+        <!-- ROW A (Matches with Right Item 11) -->
+        <tr>
+            <td class="bold">A</td> <td colspan="2" contenteditable="true">Whether option for taxation u/s 115BAC?</td> <td class="center bold" contenteditable="true">YES</td>
+            <td class="bold" rowspan="2">11</td> 
+            <td rowspan="2" colspan="2" contenteditable="true">TOTAL INCOME (8-10)</td> 
+            <td rowspan="2">Rs.</td> 
+            <td rowspan="2" style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">1</td> <td contenteditable="true">GROSS SALARY</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right" id="grossSalary"></td>
+        </tr>
+        <tr>
+            <td class="bold">2</td> <td contenteditable="true">(a) LESS : Allowance to the extent exempt<br>Under Section 10 (13A)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">12</td> <td colspan="2" contenteditable="true">TOTAL INCOME</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(b) LESS : Allowance to the extent exempt<br>Under Section 10 (14) (i)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">13</td> <td colspan="2" contenteditable="true">TAX ON TOTAL INCOME</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">3</td> <td contenteditable="true">BALANCE (1-2)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right" id="balance"></td>
+            <td class="bold">14</td> <td colspan="2" contenteditable="true">TAX REBATE U/S 87 A</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">4</td> <td contenteditable="true">ADD: ANY OTHER INCOME REPORTED BY<br>THE EMPLOYEE</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">15</td> <td colspan="2" contenteditable="true">TAX AFTER REBATE</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">5</td> <td contenteditable="true">GROSS TOTAL INCOME (3+4)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right" id="grossTotalIncome"></td>
+            <td class="bold">16</td> <td colspan="2" contenteditable="true">EDUCATION & HEALTH CESS</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">6</td> <td contenteditable="true">UNDER SECTION 24(1)<br>DEDUCTION(H.B.A INT +P.TAX)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">17</td> <td colspan="2" contenteditable="true">TOTAL</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">7</td> <td contenteditable="true">STANDARD DEDUCTION</td> <td>Rs.</td> <td class="center bold" contenteditable="true">75000</td>
+            <td class="bold">18</td> <td colspan="2" contenteditable="true">RELIEF U/S 89(I)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">8</td> <td contenteditable="true">INCOME CHARGEABLE UNDER THE<br>HEAD 'SALARIES'(5-6-7)</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right" id="incomeChargeable"></td>
+            <td class="bold">19</td> <td colspan="2" contenteditable="true">TOTAL PAYABLE TAX</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">9</td> <td contenteditable="true">Deductions under chapter VI-A</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">20</td> <td colspan="2" contenteditable="true">TAX DEDUCTED AT SOURCE</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">(A) Sec 80C, 80CCC & 80CCD</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="bold">21</td> <td colspan="2" contenteditable="true">TAX PAYABLE/REFUNDABLE</td> <td>Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+             <!-- LOWER SPLIT SECTION -->
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">(a) Section 80 C</td>
+            <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td colspan="5" class="center bold" style="background: #f0f0f0;" contenteditable="true">DETAILS OF TAX DEDUCTED</td>
+        </tr>
+
+        <!-- Header Row (Spans 2 Left Rows) -->
+        <tr>
+            <td></td> <td contenteditable="true">(i) GPF/PRAN</td>
+            <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            
+            <td rowspan="2" class="center bold" style="font-size: 9px;">Sn. No.</td> 
+            <td rowspan="2" class="center bold" style="font-size: 9px;">TDS</td> 
+            <td rowspan="2" class="center bold" style="font-size: 9px;">Education Cess</td> 
+            <td rowspan="2" class="center bold" style="font-size: 9px;">Total</td> 
+            <td rowspan="2" class="center bold" style="font-size: 9px;">Date of Tax<br>Deduction</td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(ii) LIC (inc G.I.)</td>
+            <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+        </tr>
+
+        <!-- Data Rows (Right 1 to 12) -->
+        <tr>
+            <td></td> <td contenteditable="true">(iii) Tuition fee</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">1</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Mar-<span id="year1" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(iv) Repayment of HBA</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">2</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Apr-<span id="year2" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(v) NSC/PPF</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">3</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">May-<span id="year3" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(vi) LIC Premium</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">4</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Jun-<span id="year4" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(vii) Sukanya/P.O Insurance</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">5</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Jul-<span id="year5" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">(viii) Total section 80 C</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">6</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Aug-<span id="year6" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(b) Sections 80 CCC</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">7</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Sep-<span id="year7" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td contenteditable="true">(c) Sections 80 CCD</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">8</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Oct-<span id="year8" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">(B) Sections Chapter VI-A</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">9</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Nov-<span id="year9" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">Section 80 CCD (1B)</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">10</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Dec-<span id="year10" contenteditable="true">25</span></td>
+        </tr>
+        <tr>
+            <td></td> <td class="bold" contenteditable="true">Section 80 U</td> <td class="center">Rs.</td> <td style="padding:0;"><input type="text" class="right"></td>
+            <td class="center">11</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Jan-<span id="year11" contenteditable="true">26</span></td>
+        </tr>
+        
+        <!-- Row 25 (Modified: Left gets Rs, Right is Item 12) -->
+        <tr>
+            <td></td> <td></td> <td class="center">Rs.</td> <td></td> 
+            <td class="center">12</td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td style="padding:0;"><input type="text"></td> <td class="center" style="font-size: 9px;" contenteditable="true">Feb-<span id="year12" contenteditable="true">26</span></td>
+        </tr>
+
+        <!-- AGGREGATE ROW (Modified: Total from row above moved here) -->
+        <tr style="border-top: 2px solid black;">
+            <td class="bold">10</td> 
+            <td class="bold" contenteditable="true">AGGREGATE OF DEDUCATIBLE AMOUNT VI-A (A+B)</td> 
+            <td class="center bold">Rs.</td> 
+            <td style="padding:0;"><input type="text" class="right"></td>
+            <!-- Right side: Total cols -->
+            <td class="center bold">Total</td> 
+            <td style="padding:0;"><input type="text"></td> 
+            <td style="padding:0;"><input type="text"></td> 
+            <td style="padding:0;"><input type="text"></td> 
+            <td class="center"></td>
+        </tr>
+    </table>
+
+    <!-- FOOTER -->
+    <div style="font-size: 11px; margin-top: 5px; padding: 5px; border: 1px solid white;">
+        <p style="margin: 0; line-height: 1.8; text-align: justify;" contenteditable="true">
+            I, <span id="dpoName" class="bold" contenteditable="true">Saheb Alam</span>, Son of Sri <span id="dpoFatherName" contenteditable="true">Sheikh Mansoor Alam</span>, D.P.O, Establishment, <span id="districtName2" contenteditable="true">Gopalganj</span> do hereby Certify that a sum of <span class="bold">Rs.</span> 
+            <span style="border-bottom: 1px solid black; min-width: 100px; display: inline-block;"><span id="certifiedAmount" contenteditable="true">[Amount]</span></span> 
+            has been deducted at source and paid to the credit of the Central Govt. I further Certify that the information given above is true and Correct based on the books of account, document and available records.
+        </p>
+    </div>
+
+    <!-- SIGNATURE (Shifted Up) -->
+    <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 20px;">
+        <div style="text-align: center; font-size: 11px;" contenteditable="true">
+            Place: <span id="place" contenteditable="true">Gopalganj</span><br>
+            Date: <span id="date" contenteditable="true">27-04-2026</span>
+        </div>
+        <div style="text-align: center; font-weight: bold; font-size: 11px;" contenteditable="true">
+            <br><br><br>
+            Signature of the person Responsible for Deduction of Tax<br>
+            District Programme Officer<br>Establishment, <span id="districtName3" contenteditable="true">Gopalganj</span></div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<script>
+// Auto-populate function
+window.populateForm16 = function(data) {
+    // District sync
+    if(data.districtName) {
+        const d = data.districtName.toUpperCase();
+        ['districtName1','districtName2','districtName3','place'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.textContent = d;
+        });
+    }
+    
+    // Years
+    if(data.financialYear) {
+        const el = document.getElementById('financialYear');
+        if(el) el.textContent = data.financialYear;
+        
+        // Auto-calculate assessment year
+        const fy = data.financialYear.split('-');
+        if(fy.length === 2) {
+            const ay = `${parseInt(fy[0])+1}-${parseInt(fy[1])+1}`;
+            const ayEl = document.getElementById('assessmentYear1');
+            if(ayEl) ayEl.textContent = ay;
+            
+            // Auto-fill month years
+            const startYear = fy[0].substring(2);
+            const endYear = fy[1];
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = startYear;
+            }
+            for(let i=11; i<=12; i++) {
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = endYear;
+            }
+        }
+    }
+    
+    // DPO
+    if(data.dpoName) {
+        const el = document.getElementById('dpoName');
+        if(el) el.textContent = data.dpoName.toUpperCase();
+    }
+    if(data.dpoFatherName) {
+        const el = document.getElementById('dpoFatherName');
+        if(el) el.textContent = data.dpoFatherName.toUpperCase();
+    }
+    if(data.deductorPAN) {
+        const el = document.getElementById('deductorPAN');
+        if(el) el.textContent = data.deductorPAN.toUpperCase();
+    }
+    if(data.deductorTAN) {
+        const el = document.getElementById('deductorTAN');
+        if(el) el.textContent = data.deductorTAN.toUpperCase();
+    }
+    
+    // Employee
+    if(data.employeePAN) {
+        const el = document.getElementById('employeePAN');
+        if(el) el.value = data.employeePAN.toUpperCase();
+    }
+    
+    // Salary fields
+    if(data.grossSalary) {
+        const el = document.getElementById('grossSalary');
+        if(el) el.value = data.grossSalary;
+    }
+    
+    if(data.date) {
+        const el = document.getElementById('date');
+        if(el) el.textContent = data.date;
+    }
+    
+    console.log('✅ Form 16 Page 1 populated');
+};
+
+// District auto-sync
+document.addEventListener('DOMContentLoaded', function() {
+    const d1 = document.getElementById('districtName1');
+    if(d1) {
+        d1.addEventListener('input', (e) => {
+            const val = e.target.textContent;
+            ['districtName2','districtName3','place'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.textContent = val;
+            });
+        });
+    }
+
+<script>
+window.populateForm16 = function(data) {
+    if(data.districtName) {
+        const d = data.districtName.toUpperCase();
+        ['districtName1','districtName2','districtName3','place'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.textContent = d;
+        });
+    }
+    if(data.financialYear) {
+        const el = document.getElementById('financialYear');
+        if(el) el.textContent = data.financialYear;
+        const fy = data.financialYear.split('-');
+        if(fy.length === 2) {
+            const ay = `${parseInt(fy[0])+1}-${parseInt(fy[1])+1}`;
+            const ayEl = document.getElementById('assessmentYear1');
+            if(ayEl) ayEl.textContent = ay;
+            const startYear = fy[0].substring(2);
+            const endYear = fy[1];
+            for(let i=1; i<=10; i++) {
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = startYear;
+            }
+            for(let i=11; i<=12; i++) {
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = endYear;
+            }
+        }
+    }
+    if(data.dpoName) document.getElementById('dpoName').textContent = data.dpoName.toUpperCase();
+    if(data.employeePAN) document.getElementById('employeePAN').value = data.employeePAN.toUpperCase();
+    console.log('✅ Populated');
+};
+</script>
+</body>
+</html>

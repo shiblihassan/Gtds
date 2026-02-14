@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Statement 2025-26</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #555;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 10mm;
+            box-sizing: border-box;
+            position: relative;
+        }
+        /* Input & Edit Styles */
+        input, textarea {
+            background: rgba(255, 255, 0, 0.05);
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-family: inherit;
+            font-size: inherit;
+            box-sizing: border-box;
+            padding: 2px;
+            text-align: center; /* Center align for numbers */
+            outline: none;
+        }
+        input.left-align { text-align: left; }
+        input:focus { background: #e8f0fe; }
+        
+        [contenteditable="true"]:hover {
+            outline: 1px dashed #007bff;
+            background-color: rgba(0, 123, 255, 0.05);
+            cursor: text;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 2px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .bold { font-weight: bold; }
+        .left { text-align: left; padding-left: 4px; }
+        .right { text-align: right; padding-right: 4px; }
+        
+        /* Specific Layouts */
+        .header-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .section-header {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            padding: 4px;
+            border: 1px solid black;
+            border-bottom: none;
+            font-size: 11px;
+        }
+
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .page-container { margin: 0; border: none; width: 100%; height: 100%; padding: 5mm; }
+            .print-btn { display: none; }
+            input { background: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print Page 2</button>
+
+<div class="page-container">
+
+    <div class="header-title" contenteditable="true">INCOME STATEMENT OF SALARIED EMPLOYEE FOR TAX CALCULATION</div>
+
+    <!-- TABLE 1: MONTHLY DETAILS -->
+    <table>
+        <colgroup>
+            <col style="width: 8%;">  <!-- Month -->
+            <col style="width: 9%;">  <!-- Pay -->
+            <col style="width: 9%;">  <!-- DA -->
+            <col style="width: 9%;">  <!-- HR -->
+            <col style="width: 9%;">  <!-- MA -->
+            <col style="width: 9%;">  <!-- CTA -->
+            <col style="width: 10%;"> <!-- Total -->
+            <col style="width: 9%;">  <!-- PF -->
+            <col style="width: 9%;">  <!-- PTAX -->
+            <col style="width: 9%;">  <!-- GLI -->
+            <col style="width: 10%;"> <!-- ITax -->
+        </colgroup>
+        
+        <!-- Row 1: Years -->
+        <tr>
+            <td colspan="5" class="bold" >Financial Year-<span id="financialYear" contenteditable="true">2025-26</span></td>
+            <td colspan="6" class="bold" >Assessment Year-<span id="assessmentYear1" contenteditable="true">2026-27</span></td>
+        </tr>
+        
+        <!-- Row 2: Name & PAN -->
+        <tr>
+            <td colspan="2" class="left bold">Name of the Employee</td>
+            <td colspan="3"><input type="text" id="employeeName" class="left-align"></td>
+            <td colspan="2" class="bold">PAN NO.OF THE EMPLOYEE</td>
+            <td colspan="4"><input type="text" id="employeePAN"></td>
+        </tr>
+        
+        <!-- Row 3: Designation & Treasury -->
+        <tr>
+            <td colspan="2" class="left bold">Designation</td>
+            <td colspan="3"><input type="text" id="employeeDesignation" class="left-align"></td>
+            <td colspan="6" class="right bold" >Treasury Office -<span id="districtName1" contenteditable="true">Gopalganj</span></td>
+        </tr>
+
+        <!-- Row 4: Headers -->
+        <tr class="bold" style="background: #eee;">
+            <td>Month</td> <td>Pay</td> <td>D.A.</td> <td>H.R.</td> <td>M.A.</td> <td>C.T.A.</td> 
+            <td>Total</td> <td>P.F/NPS</td> <td>P TAX</td> <td>G.L.I</td> <td>I. Tax</td>
+        </tr>
+
+        <!-- Row 5: Column Numbers -->
+        <tr class="bold">
+            <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> 
+            <td>7</td> <td>8</td> <td>9</td> <td>10</td> <td>11</td>
+        </tr>
+
+        <!-- Data Rows -->
+        <tr><td>Mar-<span id="year1" contenteditable="true">25</span></td> <td><input type="text" id="m1_pay"></td> <td><input type="text" id="m1_da"></td> <td><input type="text" id="m1_hra"></td> <td><input type="text" id="m1_ma"></td> <td><input type="text" id="m1_cta"></td> <td><input type="text" id="m1_total"></td> <td><input type="text" id="m1_nps"></td> <td><input type="text" id="m1_ptax"></td> <td><input type="text" id="m1_gli"></td> <td><input type="text" id="m1_itax"></td></tr>
+        <tr><td>Apr-<span id="year2" contenteditable="true">25</span></td> <td><input type="text" id="m2_pay"></td> <td><input type="text" id="m2_da"></td> <td><input type="text" id="m2_hra"></td> <td><input type="text" id="m2_ma"></td> <td><input type="text" id="m2_cta"></td> <td><input type="text" id="m2_total"></td> <td><input type="text" id="m2_nps"></td> <td><input type="text" id="m2_ptax"></td> <td><input type="text" id="m2_gli"></td> <td><input type="text" id="m2_itax"></td></tr>
+        <tr><td>May-<span id="year3" contenteditable="true">25</span></td> <td><input type="text" id="m3_pay"></td> <td><input type="text" id="m3_da"></td> <td><input type="text" id="m3_hra"></td> <td><input type="text" id="m3_ma"></td> <td><input type="text" id="m3_cta"></td> <td><input type="text" id="m3_total"></td> <td><input type="text" id="m3_nps"></td> <td><input type="text" id="m3_ptax"></td> <td><input type="text" id="m3_gli"></td> <td><input type="text" id="m3_itax"></td></tr>
+        <tr><td>Jun-<span id="year4" contenteditable="true">25</span></td> <td><input type="text" id="m4_pay"></td> <td><input type="text" id="m4_da"></td> <td><input type="text" id="m4_hra"></td> <td><input type="text" id="m4_ma"></td> <td><input type="text" id="m4_cta"></td> <td><input type="text" id="m4_total"></td> <td><input type="text" id="m4_nps"></td> <td><input type="text" id="m4_ptax"></td> <td><input type="text" id="m4_gli"></td> <td><input type="text" id="m4_itax"></td></tr>
+        <tr><td>Jul-<span id="year5" contenteditable="true">25</span></td> <td><input type="text" id="m5_pay"></td> <td><input type="text" id="m5_da"></td> <td><input type="text" id="m5_hra"></td> <td><input type="text" id="m5_ma"></td> <td><input type="text" id="m5_cta"></td> <td><input type="text" id="m5_total"></td> <td><input type="text" id="m5_nps"></td> <td><input type="text" id="m5_ptax"></td> <td><input type="text" id="m5_gli"></td> <td><input type="text" id="m5_itax"></td></tr>
+        <tr><td>Aug-<span id="year6" contenteditable="true">25</span></td> <td><input type="text" id="m6_pay"></td> <td><input type="text" id="m6_da"></td> <td><input type="text" id="m6_hra"></td> <td><input type="text" id="m6_ma"></td> <td><input type="text" id="m6_cta"></td> <td><input type="text" id="m6_total"></td> <td><input type="text" id="m6_nps"></td> <td><input type="text" id="m6_ptax"></td> <td><input type="text" id="m6_gli"></td> <td><input type="text" id="m6_itax"></td></tr>
+        <tr><td>Sep-<span id="year7" contenteditable="true">25</span></td> <td><input type="text" id="m7_pay"></td> <td><input type="text" id="m7_da"></td> <td><input type="text" id="m7_hra"></td> <td><input type="text" id="m7_ma"></td> <td><input type="text" id="m7_cta"></td> <td><input type="text" id="m7_total"></td> <td><input type="text" id="m7_nps"></td> <td><input type="text" id="m7_ptax"></td> <td><input type="text" id="m7_gli"></td> <td><input type="text" id="m7_itax"></td></tr>
+        <tr><td>Oct-<span id="year8" contenteditable="true">25</span></td> <td><input type="text" id="m8_pay"></td> <td><input type="text" id="m8_da"></td> <td><input type="text" id="m8_hra"></td> <td><input type="text" id="m8_ma"></td> <td><input type="text" id="m8_cta"></td> <td><input type="text" id="m8_total"></td> <td><input type="text" id="m8_nps"></td> <td><input type="text" id="m8_ptax"></td> <td><input type="text" id="m8_gli"></td> <td><input type="text" id="m8_itax"></td></tr>
+        <tr><td>Nov-<span id="year9" contenteditable="true">25</span></td> <td><input type="text" id="m9_pay"></td> <td><input type="text" id="m9_da"></td> <td><input type="text" id="m9_hra"></td> <td><input type="text" id="m9_ma"></td> <td><input type="text" id="m9_cta"></td> <td><input type="text" id="m9_total"></td> <td><input type="text" id="m9_nps"></td> <td><input type="text" id="m9_ptax"></td> <td><input type="text" id="m9_gli"></td> <td><input type="text" id="m9_itax"></td></tr>
+        <tr><td>Dec-<span id="year10" contenteditable="true">25</span></td> <td><input type="text" id="m10_pay"></td> <td><input type="text" id="m10_da"></td> <td><input type="text" id="m10_hra"></td> <td><input type="text" id="m10_ma"></td> <td><input type="text" id="m10_cta"></td> <td><input type="text" id="m10_total"></td> <td><input type="text" id="m10_nps"></td> <td><input type="text" id="m10_ptax"></td> <td><input type="text" id="m10_gli"></td> <td><input type="text" id="m10_itax"></td></tr>
+        <tr><td>Jan-<span id="year11" contenteditable="true">26</span></td> <td><input type="text" id="m11_pay"></td> <td><input type="text" id="m11_da"></td> <td><input type="text" id="m11_hra"></td> <td><input type="text" id="m11_ma"></td> <td><input type="text" id="m11_cta"></td> <td><input type="text" id="m11_total"></td> <td><input type="text" id="m11_nps"></td> <td><input type="text" id="m11_ptax"></td> <td><input type="text" id="m11_gli"></td> <td><input type="text" id="m11_itax"></td></tr>
+        <tr><td>Feb-<span id="year12" contenteditable="true">26</span></td> <td><input type="text" id="m12_pay"></td> <td><input type="text" id="m12_da"></td> <td><input type="text" id="m12_hra"></td> <td><input type="text" id="m12_ma"></td> <td><input type="text" id="m12_cta"></td> <td><input type="text" id="m12_total"></td> <td><input type="text" id="m12_nps"></td> <td><input type="text" id="m12_ptax"></td> <td><input type="text" id="m12_gli"></td> <td><input type="text" id="m12_itax"></td></tr>
+        
+        <!-- Extra Rows -->
+        <tr><td class="bold">D.A</td> <td><input type="text" id="da1_c1"></td> <td><input type="text" id="da1_c2"></td> <td><input type="text" id="da1_c3"></td> <td><input type="text" id="da1_c4"></td> <td><input type="text" id="da1_c5"></td> <td><input type="text" id="da1_c6"></td> <td><input type="text" id="da1_c7"></td> <td><input type="text" id="da1_c8"></td> <td><input type="text" id="da1_c9"></td> <td><input type="text" id="da1_c10"></td></tr>
+        <tr><td class="bold">D.A</td> <td><input type="text" id="da2_c1"></td> <td><input type="text" id="da2_c2"></td> <td><input type="text" id="da2_c3"></td> <td><input type="text" id="da2_c4"></td> <td><input type="text" id="da2_c5"></td> <td><input type="text" id="da2_c6"></td> <td><input type="text" id="da2_c7"></td> <td><input type="text" id="da2_c8"></td> <td><input type="text" id="da2_c9"></td> <td><input type="text" id="da2_c10"></td></tr>
+        <tr><td class="bold">ARREAR</td> <td><input type="text" id="arrear_pay"></td> <td><input type="text" id="arrear_da"></td> <td><input type="text" id="arrear_hra"></td> <td><input type="text" id="arrear_ma"></td> <td><input type="text" id="arrear_cta"></td> <td><input type="text" id="arrear_total"></td> <td><input type="text" id="arrear_nps"></td> <td><input type="text" id="arrear_ptax"></td> <td><input type="text" id="arrear_gli"></td> <td><input type="text" id="arrear_itax"></td></tr>
+        
+        <!-- Total Row -->
+        <tr class="bold" style="background: #f9f9f9;">
+            <td>Total</td> 
+            <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td> 
+            <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td> <td><input type="text"></td>
+        </tr>
+    </table>
+    <!-- TABLE 2: TAX CALCULATION SHEET -->
+    <div class="section-header" contenteditable="true">INCOME TAX CALCULATION SHEET - 2025-26</div>
+    
+    <table style="margin-top: 0;">
+        <colgroup>
+            <!-- Left Side Cols -->
+            <col style="width: 25px;"> <col style="width: auto;"> <col style="width: 25px;"> <col style="width: 70px;">
+            <!-- Right Side Cols -->
+            <col style="width: 25px;"> <col style="width: auto;"> <col style="width: 25px;"> <col style="width: 70px;">
+        </colgroup>
+
+        <!-- Rows 1 to 9 (Standard) -->
+        <tr>
+            <td class="bold">A.</td> <td class="left bold" contenteditable="true">Whether option for taxation u/s 115BAC?</td> <td class="bold center">YES</td> <td></td>
+            <td class="bold">11</td> <td class="left" contenteditable="true">TOTAL INCOME (8-10)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">1.</td> <td class="left" contenteditable="true">GROSS SALARY</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">12</td> <td class="left" contenteditable="true">TOTAL INCOME</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">2.</td> <td class="left" contenteditable="true">(a) LESS : Allowance to the extent exempt under Section 10 (13A)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">13</td> <td class="left" contenteditable="true">TAX ON TOTAL INCOME</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold"></td> <td class="left" contenteditable="true">(b) LESS : Allowance to the extent exempt Under Section 10 (14)(i)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">14</td> <td class="left" contenteditable="true">TAX REBATE U/S 87 A</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">3.</td> <td class="left" contenteditable="true">BALANCE (1-2)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">15</td> <td class="left" contenteditable="true">TAX AFTER REBATE</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">4.</td> <td class="left" contenteditable="true">ADD: ANY OTHER INCOME REPORTED BY THE EMPLOYEE</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">16</td> <td class="left" contenteditable="true">EDUCATION & HEALTH CESS</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">5.</td> <td class="left" contenteditable="true">GROSS TOTAL INCOME (3+4)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">17</td> <td class="left" contenteditable="true">TOTAL</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">6.</td> <td class="left" contenteditable="true">UNDER SECTION 24(1)H.B.A INT +P.TAX</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">18</td> <td class="left" contenteditable="true">RELIEF U/S 89(I)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">7.</td> <td class="left" contenteditable="true">STANDARD DEDUCTION</td> <td class="left">Rs.</td> <td class="bold center">75000</td>
+            <td class="bold">19</td> <td class="left" contenteditable="true">TOTAL PAYABLE TAX</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">8.</td> <td class="left" contenteditable="true">INCOME CHARGEABLE UNDER THE HEAD 'SALARIES'(5-6-7)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">20</td> <td class="left" contenteditable="true">TAX DEDUCTED AT SOURCE</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+        <tr>
+            <td class="bold">9.</td> <td class="left" contenteditable="true">Deductions under chapter VI-A</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <td class="bold">21</td> <td class="left" contenteditable="true">TAX PAYABLE/REFUNDABLE</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+        </tr>
+
+        <!-- SPLIT SECTION: LEFT (Details) | RIGHT (Large Merged Cell) -->
+        <tr>
+            <td class="bold">(A)</td> <td class="left bold" contenteditable="true">Sections 80C,80CCC and 80 CCD</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            
+            <!-- RIGHT SIDE MERGED CELL -->
+            <td rowspan="14" colspan="4" style="vertical-align: top; text-align: center; padding: 20px;">
+                <div style="font-weight: bold; margin-top: 20px;" >Tax Deduction From February, <span id="taxDeductionYear" contenteditable="true">2026</span></div>
+                <textarea id="taxDeductionText" style="width: 100%; height: 80%; border: none; text-align: center; background: transparent;"></textarea>
+            </td>
+        </tr>
+
+        <!-- Left Side List -->
+        <tr><td>(a)</td> <td class="left">Section 80 C</td> <td></td> <td></td></tr>
+        <tr><td>(i)</td> <td class="left">GPF/PRAN</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(ii)</td> <td class="left">LIC (including G.I.)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(iii)</td> <td class="left">Tuition fee</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(iv)</td> <td class="left">Repayment of HBA</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(v)</td> <td class="left">NSC/PPF</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(vi)</td> <td class="left">LIC Primium</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(vii)</td> <td class="left">Sukanya/P.O Insurance</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(viii)</td> <td class="left bold">Total section 80 C</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(b)</td> <td class="left">Sections 80 CCC</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(c)</td> <td class="left">Sections 80 CCD</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td>(B)</td> <td class="left bold">Under Sections Chapter VI-A</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td></td> <td class="left bold">Section 80 CCD (1B)</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+        <tr><td></td> <td class="left bold">Section 80-EEA</td> <td class="left">Rs.</td> <td><input type="text" class="right"></td></tr>
+
+        <!-- Last Row: Aggregate -->
+        <tr>
+            <td class="bold">10.</td> <td class="left bold" contenteditable="true">AGGREGATE OF DEDUCATIBLE AMOUNT VI-A (A+B)</td> 
+            <td class="left">Rs.</td> <td><input type="text" class="right"></td>
+            <!-- Right side empty for this row -->
+            <td colspan="4"></td>
+        </tr>
+    </table>
+
+    <!-- Footer Signatures -->
+    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 10px;">
+        <div style="text-align: center;">
+            <div style="width: 150px; border-top: 1px solid black; padding-top: 5px; font-style: italic;" contenteditable="true">Signature of Employee</div>
+        </div>
+        <div style="text-align: right; font-weight: bold; font-size: 11px;" >District Programme Officer<br>Establishment, <span id="districtName3" contenteditable="true">Gopalganj</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<script>
+// =======================================================
+// AUTO-POPULATE PAGE 2 FROM PAGE 1 DATA
+// =======================================================
+
+window.populateForm16Page2 = function(data) {
+    console.log('📄 Populating Page 2...', data);
+    
+    // 1. Financial Year & Assessment Year
+    if(data.financialYear) {
+        const fyEl = document.getElementById('financialYear');
+        if(fyEl) fyEl.textContent = data.financialYear;
+        
+        const fy = data.financialYear.split('-');
+        if(fy.length === 2) {
+            // Auto-calculate Assessment Year
+            const ay = `${parseInt(fy[0])+1}-${parseInt(fy[1])+1}`;
+            const ayEl = document.getElementById('assessmentYear1');
+            if(ayEl) ayEl.textContent = ay;
+            
+            // Tax deduction year (last year only)
+            const taxYearEl = document.getElementById('taxDeductionYear');
+            if(taxYearEl) taxYearEl.textContent = fy[1];
+            
+            // Auto-fill month years (Mar-Oct = start year, Nov-Feb = end year)
+            const startYear = fy[0].substring(2); // Last 2 digits
+            const endYear = fy[1];
+            
+            for(let i=1; i<=10; i++) { // Mar to Dec
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = startYear;
+            }
+            for(let i=11; i<=12; i++) { // Jan to Feb
+                const el = document.getElementById('year'+i);
+                if(el) el.textContent = endYear;
+            }
+        }
+    }
+    
+    // 2. District Name (sync to 2 places)
+    if(data.districtName) {
+        const dist = data.districtName.toUpperCase();
+        const d1 = document.getElementById('districtName1');
+        const d3 = document.getElementById('districtName3');
+        if(d1) d1.textContent = dist;
+        if(d3) d3.textContent = dist;
+    }
+    
+    // 3. Employee Details
+    if(data.employeeName) {
+        const el = document.getElementById('employeeName');
+        if(el) el.value = data.employeeName.toUpperCase();
+    }
+    
+    if(data.employeeDesignation) {
+        const el = document.getElementById('employeeDesignation');
+        if(el) el.value = data.employeeDesignation;
+    }
+    
+    if(data.employeePAN) {
+        const el = document.getElementById('employeePAN');
+        if(el) el.value = data.employeePAN.toUpperCase();
+    }
+    
+    // 4. Monthly Salary Data (12 months)
+    if(data.monthlyData && Array.isArray(data.monthlyData)) {
+        data.monthlyData.forEach((month, index) => {
+            const monthNum = index + 1;
+            
+            // Fill each field if available
+            if(month.basic) {
+                const el = document.getElementById(`m${monthNum}_pay`);
+                if(el) el.value = month.basic;
+            }
+            if(month.daAmount) {
+                const el = document.getElementById(`m${monthNum}_da`);
+                if(el) el.value = month.daAmount;
+            }
+            if(month.hraAmount) {
+                const el = document.getElementById(`m${monthNum}_hra`);
+                if(el) el.value = month.hraAmount;
+            }
+            if(month.medical) {
+                const el = document.getElementById(`m${monthNum}_ma`);
+                if(el) el.value = month.medical;
+            }
+            // CTA usually blank or "-"
+            const ctaEl = document.getElementById(`m${monthNum}_cta`);
+            if(ctaEl) ctaEl.value = month.cta || '-';
+            
+            if(month.gross) {
+                const el = document.getElementById(`m${monthNum}_total`);
+                if(el) el.value = month.gross;
+            }
+            if(month.nps) {
+                const el = document.getElementById(`m${monthNum}_nps`);
+                if(el) el.value = month.nps;
+            }
+            if(month.pTax !== undefined) {
+                const el = document.getElementById(`m${monthNum}_ptax`);
+                if(el) el.value = month.pTax;
+            }
+            if(month.gli) {
+                const el = document.getElementById(`m${monthNum}_gli`);
+                if(el) el.value = month.gli;
+            }
+            // ITax usually 0
+            const itaxEl = document.getElementById(`m${monthNum}_itax`);
+            if(itaxEl) itaxEl.value = month.iTax || '0';
+        });
+    }
+    
+    // 5. Arrear Data
+    if(data.arrearAmount) {
+        const el = document.getElementById('arrear_total');
+        if(el) el.value = data.arrearAmount;
+    }
+    if(data.arrearNPS) {
+        const el = document.getElementById('arrear_nps');
+        if(el) el.value = data.arrearNPS;
+    }
+    
+    // 6. Calculate and fill totals (if needed)
+    if(data.totals) {
+        const fields = ['pay', 'da', 'hra', 'ma', 'cta', 'gross', 'nps', 'ptax', 'gli', 'itax'];
+        fields.forEach(field => {
+            if(data.totals[field]) {
+                const el = document.getElementById(`total_${field}`);
+                if(el) el.value = data.totals[field];
+            }
+        });
+    }
+    
+    console.log('✅ Page 2 populated successfully!');
+};
+
+// District auto-sync (if user edits directly)
+document.addEventListener('DOMContentLoaded', function() {
+    const d1 = document.getElementById('districtName1');
+    const d3 = document.getElementById('districtName3');
+    
+    if(d1 && d3) {
+        d1.addEventListener('input', function(e) {
+            d3.textContent = e.target.textContent;
+        });
+    }
+    
+    console.log('📄 Page 2 initialized with IDs');
+});
+</script>
+
+</body>
+</html>
